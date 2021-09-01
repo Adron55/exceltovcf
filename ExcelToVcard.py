@@ -39,7 +39,9 @@ for i in range(len(column)):
                 mName=" " + str(column["MiddleName"][i])+" "
         secN="\nN:"+ sName + ";" + fName + ";"+mName.strip()+";"+prefix.strip()+";"+suffix.strip()
         secFN="\nFN:" + prefix + "" + fName + mName + sName + "," + suffix
-        secPhone="\nTEL;CELL:+"+str(column["Phone"][i]).split(".")[0]
+        # secPhone="\nTEL;CELL:+"+str(column["Phone"][i]).split(".")[0] #v1
+        secPhone="\nTEL;CELL:+994"+str(column["Phone"][i]) #v2
+        # print("Phone ",secPhone) #For testing purposes
         if("Mail" in column.columns.values):
             secMail=""
             if(str(column["Mail"][i]) != "nan"):
@@ -53,7 +55,7 @@ for i in range(len(column)):
             if(str(column["Title"][i]) != "nan"):
                 secTit="\nTITLE:" + str(column["Title"][i])
         s+=begin+secN + secFN +secPhone + secMail+ secOrg+ secTit+"\nEND:VCARD\n"
-text_file = open("Exported.vcf", "w")
+text_file = open("Exported.vcf", "w",encoding="utf-8") #Encoding utf-8 added
 text_file.write(s)
 text_file.close()
 print("Completed!")
